@@ -260,7 +260,7 @@ where
 
     fn get_param_metadata(_circuit: C, pub_params: &P) -> Result<CacheEntryMetadata> {
         let id = Self::cache_identifier(pub_params);
-
+        info!("get_param_metadata id: {:?}", id);
         // generate (or load) metadata
         let meta_path = ensure_ancestor_dirs_exist(parameter_cache_metadata_path(&id))?;
         read_cached_metadata(&meta_path)
@@ -375,7 +375,7 @@ where
         pub_params: &P,
     ) -> Result<groth16::VerifyingKey<Bls12>> {
         let id = Self::cache_identifier(pub_params);
-
+        info!("get_verifying_key, id: {:?}, cache_path: {:?}", id, cache_path);
         #[cfg(not(feature = "cuda-supraseal"))]
         let generate = || -> Result<groth16::VerifyingKey<Bls12>> {
             let groth_params = Self::get_groth_params(rng, circuit, pub_params)?;
