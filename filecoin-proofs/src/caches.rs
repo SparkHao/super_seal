@@ -193,7 +193,7 @@ where
     )
 }
 
-pub(crate) fn get_stacked_params<Tree: 'static + MerkleTreeTrait>(
+pub fn get_stacked_params<Tree: 'static + MerkleTreeTrait>(
     porep_config: &PoRepConfig,
 ) -> Result<Arc<Bls12GrothParams>> {
     let public_params = public_params::<Tree>(porep_config)?;
@@ -215,7 +215,7 @@ pub(crate) fn get_stacked_params<Tree: 'static + MerkleTreeTrait>(
     )
 }
 
-pub(crate) fn get_post_params<Tree: 'static + MerkleTreeTrait>(
+pub fn get_post_params<Tree: 'static + MerkleTreeTrait>(
     post_config: &PoStConfig,
 ) -> Result<Arc<Bls12GrothParams>> {
     match post_config.typ {

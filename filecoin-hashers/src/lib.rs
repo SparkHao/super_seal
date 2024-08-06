@@ -13,6 +13,6 @@ mod poseidon_types;
 #[cfg(feature = "sha256")]
 pub mod sha256;
 
-mod types;
+pub mod types;
 
 pub use self::types::*;

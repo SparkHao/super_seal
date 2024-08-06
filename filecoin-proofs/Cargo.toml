@@ -38,6 +38,10 @@ serde_json.workspace = true
 sha2.workspace = true
 typenum.workspace = true
 
+mapr = "0.8.0"
+crossbeam = "0.7.2"
+chrono = "0.4"
+
 [dev-dependencies]
 # Sorted alphabetically
 criterion.workspace = true
@@ -47,7 +51,7 @@ tempfile.workspace = true
 walkdir = "2.3.2"
 
 [features]
-default = ["opencl"]
+default = ["cuda-supraseal"]
 cpu-profile = ["gperftools"]
 heap-profile = ["gperftools/heap"]
 simd = ["storage-proofs-core/simd"]

@@ -33,13 +33,13 @@ use crate::{
     },
 };
 
-mod fake_seal;
-mod post_util;
-mod seal;
-mod update;
-mod util;
-mod window_post;
-mod winning_post;
+pub mod fake_seal;
+pub mod post_util;
+pub mod seal;
+pub mod update;
+pub mod util;
+pub mod window_post;
+pub mod winning_post;
 
 pub use fake_seal::*;
 pub use post_util::*;

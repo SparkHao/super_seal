@@ -29,7 +29,7 @@ use storage_proofs_update::{
 };
 use structopt::StructOpt;
 
-fn cache_porep_params<Tree: 'static + MerkleTreeTrait>(porep_config: PoRepConfig) {
+pub fn cache_porep_params<Tree: 'static + MerkleTreeTrait>(porep_config: PoRepConfig) {
     info!("generating PoRep groth params");
 
     let public_params =

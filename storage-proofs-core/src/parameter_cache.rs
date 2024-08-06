@@ -302,10 +302,12 @@ where
         };
 
         // load or generate Groth parameter mappings
+        info!("start read_cached_params, cache_path: {:?}", cache_path);
         read_cached_params(&cache_path).or_else(|err| match err.downcast::<Error>() {
             Ok(error @ Error::InvalidParameters(_)) => Err(error.into()),
             _ => {
                 // if the file already exists, another process is already trying to generate these.
+                info!("---1---");
                 if !cache_path.exists() {
                     match write_cached_params(&cache_path, generate()?) {
                         Ok(_) => {}
@@ -315,6 +317,7 @@ where
                         Err(e) => panic!("{}: failed to write generated parameters to cache", e),
                     }
                 }
+                info!("before cache_path: {:?}", cache_path);
                 Ok(read_cached_params(&cache_path)?)
             }
         })
@@ -482,7 +485,9 @@ pub fn read_cached_params(cache_entry_path: &Path) -> Result<Bls12GrothParams> {
         verify_production_entry(cache_entry_path, cache_key, selector)?;
     }
 
-    read_cached_params_inner(cache_entry_path).map_err(Into::into)
+    let aa = read_cached_params_inner(cache_entry_path).map_err(Into::into);
+    info!("---------aa: {:?}", aa.is_ok());
+    aa
 }
 
 #[cfg(not(feature = "cuda-supraseal"))]
@@ -501,6 +506,7 @@ fn read_cached_params_inner(
 fn read_cached_params_inner(
     cache_entry_path: &Path,
 ) -> std::result::Result<groth16::SuprasealParameters<Bls12>, io::Error> {
+    info!("read_cached_params_inner start, path: {:?}", cache_entry_path);
     let supraseal_params = Bls12GrothParams::new(cache_entry_path.to_path_buf());
     info!(
         "read parameters into SuprasSeal from cache {:?} ",
