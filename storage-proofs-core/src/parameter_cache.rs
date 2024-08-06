@@ -375,7 +375,7 @@ where
         pub_params: &P,
     ) -> Result<groth16::VerifyingKey<Bls12>> {
         let id = Self::cache_identifier(pub_params);
-        info!("get_verifying_key, id: {:?}, cache_path: {:?}", id, cache_path);
+        info!("get_verifying_key start , id: {:?}", id);
         #[cfg(not(feature = "cuda-supraseal"))]
         let generate = || -> Result<groth16::VerifyingKey<Bls12>> {
             let groth_params = Self::get_groth_params(rng, circuit, pub_params)?;
@@ -389,6 +389,7 @@ where
 
         // generate (or load) verifying key
         let cache_path = ensure_ancestor_dirs_exist(parameter_cache_verifying_key_path(&id))?;
+        info!("get_verifying_key id: {:?}, cache_path: {:?}", id, cache_path);
         match read_cached_verifying_key(&cache_path) {
             Ok(key) => Ok(key),
             Err(_) => write_cached_verifying_key(&cache_path, generate()?).map_err(Into::into),
