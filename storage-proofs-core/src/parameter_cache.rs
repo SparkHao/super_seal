@@ -486,9 +486,7 @@ pub fn read_cached_params(cache_entry_path: &Path) -> Result<Bls12GrothParams> {
         verify_production_entry(cache_entry_path, cache_key, selector)?;
     }
 
-    let aa = read_cached_params_inner(cache_entry_path).map_err(Into::into);
-    info!("---------aa: {:?}", aa.is_ok());
-    aa
+    read_cached_params_inner(cache_entry_path).map_err(Into::into)
 }
 
 #[cfg(not(feature = "cuda-supraseal"))]

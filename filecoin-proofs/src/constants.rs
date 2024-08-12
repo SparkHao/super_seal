@@ -39,41 +39,41 @@ pub const FIP92_MIN_NI_POREP_AGGREGATION_PROOFS: usize = 1;
 pub const FIP92_MAX_NI_POREP_AGGREGATION_PROOFS: usize = 65;
 
 /// Sector sizes for which parameters are supported.
-pub const SUPPORTED_SECTOR_SIZES: [u64; 3] = [
-    // SECTOR_SIZE_2_KIB,
-    // SECTOR_SIZE_4_KIB,
+pub const SUPPORTED_SECTOR_SIZES: [u64; 10] = [
+    SECTOR_SIZE_2_KIB,
+    SECTOR_SIZE_4_KIB,
     SECTOR_SIZE_16_KIB,
     SECTOR_SIZE_32_KIB,
     SECTOR_SIZE_8_MIB,
-    // SECTOR_SIZE_16_MIB,
-    // SECTOR_SIZE_512_MIB,
-    // SECTOR_SIZE_1_GIB,
-    // SECTOR_SIZE_32_GIB,
-    // SECTOR_SIZE_64_GIB,
+    SECTOR_SIZE_16_MIB,
+    SECTOR_SIZE_512_MIB,
+    SECTOR_SIZE_1_GIB,
+    SECTOR_SIZE_32_GIB,
+    SECTOR_SIZE_64_GIB,
 ];
 
 /// Sector sizes for which parameters have been published.
-pub const PUBLISHED_SECTOR_SIZES: [u64; 1] = [
-    // SECTOR_SIZE_2_KIB,
+pub const PUBLISHED_SECTOR_SIZES: [u64; 5] = [
+    SECTOR_SIZE_2_KIB,
     SECTOR_SIZE_8_MIB,
-    // SECTOR_SIZE_512_MIB,
-    // SECTOR_SIZE_32_GIB,
-    // SECTOR_SIZE_64_GIB,
+    SECTOR_SIZE_512_MIB,
+    SECTOR_SIZE_32_GIB,
+    SECTOR_SIZE_64_GIB,
 ];
 
 lazy_static! {
     pub static ref POREP_PARTITIONS: RwLock<HashMap<u64, u8>> = RwLock::new(
         [
-            // (SECTOR_SIZE_2_KIB, 1),
-            // (SECTOR_SIZE_4_KIB, 1),
+            (SECTOR_SIZE_2_KIB, 1),
+            (SECTOR_SIZE_4_KIB, 1),
             (SECTOR_SIZE_16_KIB, 1),
             (SECTOR_SIZE_32_KIB, 1),
             (SECTOR_SIZE_8_MIB, 1),
-            // (SECTOR_SIZE_16_MIB, 1),
-            // (SECTOR_SIZE_512_MIB, 1),
-            // (SECTOR_SIZE_1_GIB, 1),
-            // (SECTOR_SIZE_32_GIB, 10),
-            // (SECTOR_SIZE_64_GIB, 10),
+            (SECTOR_SIZE_16_MIB, 1),
+            (SECTOR_SIZE_512_MIB, 1),
+            (SECTOR_SIZE_1_GIB, 1),
+            (SECTOR_SIZE_32_GIB, 10),
+            (SECTOR_SIZE_64_GIB, 10),
         ]
         .iter()
         .copied()
@@ -81,16 +81,16 @@ lazy_static! {
     );
     pub static ref LAYERS: RwLock<HashMap<u64, usize>> = RwLock::new(
         [
-            // (SECTOR_SIZE_2_KIB, 2),
-            // (SECTOR_SIZE_4_KIB, 2),
+            (SECTOR_SIZE_2_KIB, 2),
+            (SECTOR_SIZE_4_KIB, 2),
             (SECTOR_SIZE_16_KIB, 2),
             (SECTOR_SIZE_32_KIB, 2),
             (SECTOR_SIZE_8_MIB, 2),
-            // (SECTOR_SIZE_16_MIB, 2),
-            // (SECTOR_SIZE_512_MIB, 2),
-            // (SECTOR_SIZE_1_GIB, 2),
-            // (SECTOR_SIZE_32_GIB, 11),
-            // (SECTOR_SIZE_64_GIB, 11),
+            (SECTOR_SIZE_16_MIB, 2),
+            (SECTOR_SIZE_512_MIB, 2),
+            (SECTOR_SIZE_1_GIB, 2),
+            (SECTOR_SIZE_32_GIB, 11),
+            (SECTOR_SIZE_64_GIB, 11),
         ]
         .iter()
         .copied()
@@ -101,16 +101,16 @@ lazy_static! {
     // https://github.com/filecoin-project/specs-actors/blob/master/actors/abi/sector.go
     pub static ref WINDOW_POST_SECTOR_COUNT: RwLock<HashMap<u64, usize>> = RwLock::new(
         [
-            // (SECTOR_SIZE_2_KIB, 2),
-            // (SECTOR_SIZE_4_KIB, 2),
+            (SECTOR_SIZE_2_KIB, 2),
+            (SECTOR_SIZE_4_KIB, 2),
             (SECTOR_SIZE_16_KIB, 2),
             (SECTOR_SIZE_32_KIB, 2),
             (SECTOR_SIZE_8_MIB, 2),
-            // (SECTOR_SIZE_16_MIB, 2),
-            // (SECTOR_SIZE_512_MIB, 2),
-            // (SECTOR_SIZE_1_GIB, 2),
-            // (SECTOR_SIZE_32_GIB, 2349), // this gives 125,279,217 constraints, fitting in a single partition
-            // (SECTOR_SIZE_64_GIB, 2300), // this gives 129,887,900 constraints, fitting in a single partition
+            (SECTOR_SIZE_16_MIB, 2),
+            (SECTOR_SIZE_512_MIB, 2),
+            (SECTOR_SIZE_1_GIB, 2),
+            (SECTOR_SIZE_32_GIB, 2349), // this gives 125,279,217 constraints, fitting in a single partition
+            (SECTOR_SIZE_64_GIB, 2300), // this gives 129,887,900 constraints, fitting in a single partition
         ]
         .iter()
         .copied()

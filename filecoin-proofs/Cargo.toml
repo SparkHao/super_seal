@@ -51,7 +51,7 @@ tempfile.workspace = true
 walkdir = "2.3.2"
 
 [features]
-default = ["cuda-supraseal"]
+default = ["cuda"]
 cpu-profile = ["gperftools"]
 heap-profile = ["gperftools/heap"]
 simd = ["storage-proofs-core/simd"]
