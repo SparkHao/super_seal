@@ -33,6 +33,7 @@ use crate::stacked::vanilla::{
     StackedBucketGraph, EXP_DEGREE, SYNTHETIC_POREP_VANILLA_PROOFS_EXT,
     SYNTHETIC_POREP_VANILLA_PROOFS_KEY, TOTAL_PARENTS,
 };
+use log::info;
 
 pub const BINARY_ARITY: usize = 2;
 pub const QUAD_ARITY: usize = 4;
