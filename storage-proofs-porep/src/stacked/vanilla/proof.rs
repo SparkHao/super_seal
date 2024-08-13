@@ -128,7 +128,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
 
                 (0..partition_count)
                     .map(|k| {
-                        trace!("proving partition {}/{}", k + 1, partition_count);
+                        info!("proving partition {}/{}", k + 1, partition_count);
 
                         // Derive the set of challenges we are proving over.
                         let challenge_positions = interactive_challenges.derive(
@@ -207,7 +207,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                 let comm_r = pub_inputs.tau.as_ref().expect("tau is set").comm_r;
                 (0..partition_count)
                     .map(|k| {
-                        trace!("proving partition {}/{}", k + 1, partition_count);
+                        info!("proving partition {}/{}", k + 1, partition_count);
 
                         // Derive the set of challenges we are proving over.
                         let challenge_positions = ni_challenges.derive(

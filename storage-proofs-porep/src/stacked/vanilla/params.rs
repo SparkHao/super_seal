@@ -1030,7 +1030,7 @@ impl<Tree: MerkleTreeTrait, G: Hasher> TemporaryAuxCache<Tree, G> {
             tree_count,
         )?;
 
-        trace!(
+        info!(
             "Instantiating tree r last [count {}] with size {} and arity {}, {}, {}",
             tree_count,
             tree_r_last_size,
@@ -1044,7 +1044,7 @@ impl<Tree: MerkleTreeTrait, G: Hasher> TemporaryAuxCache<Tree, G> {
 
         // Skipping labels is for when SyntheticPoRep is used and the labels no longer exist.
         if skip_labels {
-            trace!("Skipping label instantiation");
+            info!("Skipping label instantiation");
             Ok(TemporaryAuxCache {
                 labels: LabelsCache::new(&Labels::new(Vec::new())).context("labels_cache")?,
                 tree_d: None, //tree_d,

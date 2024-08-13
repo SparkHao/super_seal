@@ -63,7 +63,7 @@ impl<'a, 'c, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> ProofScheme<'
         priv_inputs: &'b Self::PrivateInputs,
         partition_count: usize,
     ) -> Result<Vec<Self::Proof>> {
-        trace!("prove_all_partitions");
+        info!("prove_all_partitions");
         ensure!(partition_count > 0, "partitions must not be 0");
 
         Self::prove_layers(

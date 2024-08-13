@@ -363,6 +363,7 @@ pub fn seal_commit_phase1<T: AsRef<Path>, Tree: 'static + MerkleTreeTrait>(
     info!("seal_commit_phase1:start: {:?}", sector_id);
 
     let skip_labels = porep_config.feature_enabled(ApiFeature::SyntheticPoRep);
+    info!("skip_labels: {}", skip_labels);
     let out = seal_commit_phase1_inner::<T, Tree>(
         porep_config,
         cache_path,
@@ -393,7 +394,7 @@ pub fn seal_commit_phase1_inner<T: AsRef<Path>, Tree: 'static + MerkleTreeTrait>
     piece_infos: &[PieceInfo],
     skip_labels: bool,
 ) -> Result<SealCommitPhase1Output<Tree>> {
-    trace!("seal_commit_phase1_inner:start: {:?}", sector_id);
+    info!("seal_commit_phase1_inner:start: {:?}", sector_id);
 
     // Sanity check all input path types.
     ensure!(
