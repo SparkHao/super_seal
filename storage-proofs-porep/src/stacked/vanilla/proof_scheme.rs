@@ -1,6 +1,6 @@
 use anyhow::ensure;
 use filecoin_hashers::{HashFunction, Hasher};
-use log::{error, trace};
+use log::{error, trace, info};
 use rayon::prelude::{IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator};
 use storage_proofs_core::{
     drgraph::Graph, error::Result, merkle::MerkleTreeTrait, proof::ProofScheme,
