@@ -37,7 +37,7 @@ use std::fs::{create_dir_all, remove_dir_all};
 use std::collections::BTreeMap;
 use filecoin_proofs::api::winning_post::{generate_winning_post, verify_winning_post, generate_winning_post_sector_challenge};
 
-use filecoin_proofs::api::seal::{seal_pre_commit_phase1, seal_pre_commit_phase2, seal_commit_phase1, seal_commit_phase2, aggregate_seal_commit_proofs, verify_aggregate_seal_commit_proofs,};
+use filecoin_proofs::api::seal::{seal_pre_commit_phase1, seal_pre_commit_phase2, seal_commit_phase1, seal_commit_phase2, aggregate_seal_commit_proofs, verify_aggregate_seal_commit_proofs, generate_synth_proofs};
 use filecoin_proofs::api::util::{
     get_base_tree_leafs, get_base_tree_size,
 };
@@ -732,7 +732,22 @@ pub fn precommit_phase2<Tree: 'static + MerkleTreeTrait>() {
             //Path::new(&get_staging_path().clone()),
             Path::new(&out_path.clone())).unwrap();
         info!("Precommit phase 2 takes {:?}", phase2_start.elapsed());
-
+        
+        if POREP_CONFIG.feature_enabled(ApiFeature::SyntheticPoRep) {
+            info!("SyntheticPoRep is enabled");
+            generate_synth_proofs::<_, Tree>(
+                &POREP_CONFIG,
+                &cache_path,
+                &PathBuf::from(&out_path.clone()),
+                phase1_meta.prover_id,
+                sector_id.into(),
+                phase1_meta.ticket,
+                pre_commit.clone(),
+                &[(PIECE_INFOS.clone())],
+            );
+        } else {
+            info!("SyntheticPoRep is NOT enabled");
+        }
 
         let comm_r = pre_commit.comm_r.clone();
         let meta = sector_meta_precommit_output {

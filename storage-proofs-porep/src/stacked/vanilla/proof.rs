@@ -875,7 +875,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                         while node_index != nodes_count {
                             let chunked_nodes_count =
                                 min(nodes_count - node_index, max_gpu_column_batch_size);
-                            trace!(
+                            info!(
                                 "processing config {}/{} with column nodes {}",
                                 i + 1,
                                 tree_count,
@@ -923,7 +923,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
                             };
 
                             node_index += chunked_nodes_count;
-                            trace!(
+                            info!(
                                 "node index {}/{}/{}",
                                 node_index,
                                 chunked_nodes_count,
@@ -1595,11 +1595,11 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
         replica_path: PathBuf,
         label_configs: Labels<Tree>,
     ) -> Result<TransformedLayers<Tree, G>> {
-        trace!("transform_and_replicate_layers");
+        info!("transform_and_replicate_layers");
         let total_nodes_count = graph.size();
 
         assert_eq!(data.len(), total_nodes_count * NODE_SIZE);
-        trace!("nodes count {}, data len {}", total_nodes_count, data.len());
+        info!("nodes count {}, data len {}", total_nodes_count, data.len());
 
         let tree_count = get_base_tree_count::<Tree>();
         let nodes_count = graph.size() / tree_count;
@@ -1607,12 +1607,12 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
         // Ensure that the node count will work for binary and oct arities.
         let binary_arity_valid = is_merkle_tree_size_valid(nodes_count, BINARY_ARITY);
         let other_arity_valid = is_merkle_tree_size_valid(nodes_count, Tree::Arity::to_usize());
-        trace!(
+        info!(
             "is_merkle_tree_size_valid({}, BINARY_ARITY) = {}",
             nodes_count,
             binary_arity_valid
         );
-        trace!(
+        info!(
             "is_merkle_tree_size_valid({}, {}) = {}",
             nodes_count,
             Tree::Arity::to_usize(),
@@ -1646,7 +1646,7 @@ impl<'a, Tree: 'static + MerkleTreeTrait, G: 'static + Hasher> StackedDrg<'a, Tr
             // discard more rows than is possible to discard.
             rows_to_discard: default_rows_to_discard(nodes_count, Tree::Arity::to_usize()),
         };
-        trace!(
+        info!(
             "tree_r_last using rows_to_discard={}",
             tree_r_last_config.rows_to_discard
         );

@@ -17,6 +17,7 @@ use crate::{
     types::{PaddedBytesAmount, PoRepProofPartitions, SectorSize, UnpaddedBytesAmount},
     POREP_PARTITIONS,
 };
+use log::info;
 
 #[derive(Clone, Debug)]
 pub struct PoRepConfig {
@@ -79,6 +80,9 @@ impl PoRepConfig {
         api_version: ApiVersion,
         api_features: Vec<ApiFeature>,
     ) -> Result<Self> {
+        info!("POREP_PARTITIONS: {:?}", &POREP_PARTITIONS.read()
+                                    .expect("POREP_PARTITIONS poisoned")
+                                    .get(&sector_size));
         let mut config = Self {
             sector_size: SectorSize(sector_size),
             partitions: PoRepProofPartitions(

@@ -466,6 +466,8 @@ pub fn seal_commit_phase1_inner<T: AsRef<Path>, Tree: 'static + MerkleTreeTrait>
         _,
     >>::setup(&compound_setup_params)?;
 
+    info!("compound_public_params.vanilla_params: {:?}", compound_public_params.vanilla_params);
+
     let vanilla_proofs = StackedDrg::prove_all_partitions(
         &compound_public_params.vanilla_params,
         &public_inputs,
